@@ -1,0 +1,37 @@
+body {
+    margin: 50px auto;
+    background: url("./images/background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    font-family: "Open Sans", sans-serif;
+    text-align: center;
+}
+
+.main-box {
+    width: 100%;
+    min-height: 500px;
+    height: 100%;
+}
+
+.cl-wrapper {
+    background: url("./images/city.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    min-height: 500px;
+    position: relative;
+    background-position-x: -30px;
+}
+
+.f-wrapper {
+    background-color: rgba(0, 0, 0, 0.727);
+    min-height: 500px;
+    background-position-x: -30px;
+}
