@@ -1,6 +1,6 @@
 body {
     margin: 50px auto;
-    background: url("./images/background.jpg");
+    background: url("./images/background1.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -19,7 +19,7 @@ body {
 }
 
 .cl-wrapper {
-    background: url("./images/city.jpg");
+    background: rgba(255, 255, 255, 0.607);
     background-repeat: no-repeat;
     background-size: cover;
     -webkit-background-size: cover;
@@ -30,8 +30,39 @@ body {
     background-position-x: -30px;
 }
 
+/* CURRERNT LOCATION INNER WRAPPER */
+.cl-inner-wrapper {
+    width: 100%;
+}
+
 .f-wrapper {
     background-color: rgba(0, 0, 0, 0.727);
     min-height: 500px;
     background-position-x: -30px;
+}
+
+/* SEARCH BUTTON */
+
+.search-btn {
+    color: rgb(29, 29, 29);
+    border: none !important;
+    padding: 6px 6px;
+    background-color: white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.search-btn:hover {
+    transition: 0.3s;
+    background-color: rgb(29, 29, 29);
+    color: white;
+}
+
+.search-bar {
+    border: none;
+    font-size: 16px !important;
+    background-color: white;
+    box-shadow: none !important;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
