@@ -1,21 +1,19 @@
-import CurrentLocation from "./components/CurrentLocation";
-import Forcast from "./components/Forcast";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
 import { WeatherProvider } from "./context/Context";
 
 const App = () => {
   return (
     <>
       <WeatherProvider>
-        <div className="container-fluid main-box">
-          <div className="row justify-content-center">
-            <div className="p-0 col-12 col-sm-12 col-md-3">
-              <Forcast />
-            </div>
-            <div className="p-0 col-12 col-sm-12 col-md-5">
-              <CurrentLocation />
-            </div>
-          </div>
-        </div>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
       </WeatherProvider>
     </>
   );

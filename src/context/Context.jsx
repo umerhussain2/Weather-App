@@ -1,41 +1,42 @@
-import { createContext, useContext, useState } from "react";
-import API from "../API";
 import axios from "axios";
+import { createContext, useContext, useState } from "react";
 
 const WeatherContext = createContext(null);
 
 const WeatherProvider = ({ children }) => {
+  const [icon, setIcon] = useState("");
   const [city, setCity] = useState(undefined);
   const [wind, setWind] = useState(undefined);
-  const [icon, setIcon] = useState("CLEAR_DAY");
+  const [tempC, setTempC] = useState(undefined);
+  const [tempF, setTempF] = useState(undefined);
   const [country, setCountry] = useState(undefined);
   const [weather, setWeather] = useState(undefined);
   const [humidity, setHumidity] = useState(undefined);
-  const [latitude, setLatitude] = useState(undefined);
-  const [longitude, setLongitude] = useState(undefined);
   const [visibility, setVisibility] = useState(undefined);
-  const [temperatureC, setTemperatureC] = useState(undefined);
-  const [temperatureF, setTemperatureF] = useState(undefined);
 
-  const getCurrentLocation = async (lat, lon) => {
-    const api_call = await axios.get(
-      `${API.base}lat=${lat}&lon=${lon}&appid=${API.key}`
+  const fetchData = async (city) => {
+    const apiCall = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=ad0f6189f33f625dbd41951a8ce620ba`
     );
 
-    const data = api_call.data;
-    console.log("CONTEXT", data);
+    const data = await apiCall.data;
+    // console.log("CON==>", data);
 
+    setTempC(data.main.temp);
+    setTempF(data.main.temp);
+    setHumidity(data.main.humidity);
     setCity(data.name);
     setCountry(data.sys.country);
-    setTemperatureC(data.main.temp);
-    setTemperatureF(data.main.temp);
+    setVisibility(data.visibility);
+    setWind(data.wind.speed);
     setWeather(data.weather[0].main);
-  };
 
-  const getIcon = (w) => {
-    switch (w) {
-      case "Haze":
+    switch (data.weather[0].main) {
+      case "Clear":
         setIcon("CLEAR_DAY");
+        break;
+      case "Haze":
+        setIcon("PARTLY_CLOUDY_DAY");
         break;
       case "Clouds":
         setIcon("CLOUDY");
@@ -55,6 +56,9 @@ const WeatherProvider = ({ children }) => {
       case "Fog":
         setIcon("FOG");
         break;
+      case "Mist":
+        setIcon("FOG");
+        break;
       case "Smoke":
         setIcon("FOG");
         break;
@@ -69,17 +73,16 @@ const WeatherProvider = ({ children }) => {
   return (
     <WeatherContext.Provider
       value={{
+        city,
         wind,
         icon,
-        city,
-        country,
+        tempC,
+        tempF,
         weather,
-        getIcon,
+        country,
         humidity,
+        fetchData,
         visibility,
-        temperatureF,
-        temperatureC,
-        getCurrentLocation,
       }}
     >
       {children}
